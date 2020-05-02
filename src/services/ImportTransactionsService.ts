@@ -77,7 +77,7 @@ class ImportTransactionsService {
         title: transaction.title,
         value: transaction.value,
         type: transaction.type,
-        // category: finalCategories.find(
+        // category_id: finalCategories.find(
         //   cat => cat.title === transaction.category,
         // ),
       })),
