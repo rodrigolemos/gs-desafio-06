@@ -2,6 +2,7 @@ import { getRepository, getCustomRepository, In } from 'typeorm';
 import csvParse from 'csv-parse';
 import fs from 'fs';
 import Category from '../models/Category';
+import Transaction from '../models/Transaction';
 
 import TransactionRepository from '../repositories/TransactionsRepository';
 
@@ -13,7 +14,7 @@ interface CSVTransaction {
 }
 
 class ImportTransactionsService {
-  async execute(filePath: string): Promise<CSVTransaction[]> {
+  async execute(filePath: string): Promise<Transaction[]> {
     const transactionRepository = getCustomRepository(TransactionRepository);
     const categoryRepository = getRepository(Category);
 
@@ -70,16 +71,16 @@ class ImportTransactionsService {
 
     await categoryRepository.save(newCategories);
 
-    // const finalCategories = [...newCategories, ...existentCategories];
+    const finalCategories = [...newCategories, ...existentCategories];
 
     const createdTransactions = transactionRepository.create(
       transactions.map(transaction => ({
         title: transaction.title,
         value: transaction.value,
         type: transaction.type,
-        // category_id: finalCategories.find(
-        //   cat => cat.title === transaction.category,
-        // ),
+        category: finalCategories.find(
+          cat => cat.title === transaction.category,
+        ),
       })),
     );
 
