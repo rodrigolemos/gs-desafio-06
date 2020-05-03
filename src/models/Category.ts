@@ -14,7 +14,7 @@ class Category {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @OneToMany(() => Transaction, transaction => transaction.category)
+  @OneToMany(() => Transaction, transaction => transaction.category_id)
   transaction: Transaction;
 
   @Column()

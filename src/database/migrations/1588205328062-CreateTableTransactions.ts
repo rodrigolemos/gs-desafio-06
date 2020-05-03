@@ -32,7 +32,7 @@ export default class CreateTableTransactions1588205328062
             type: 'varchar',
           },
           {
-            name: 'category',
+            name: 'category_id',
             type: 'uuid',
             isNullable: true,
           },
@@ -54,7 +54,7 @@ export default class CreateTableTransactions1588205328062
       'transactions',
       new TableForeignKey({
         name: 'TransactionCategory',
-        columnNames: ['category'],
+        columnNames: ['category_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'categories',
         onDelete: 'SET NULL',
