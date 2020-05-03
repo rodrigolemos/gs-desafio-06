@@ -79,7 +79,7 @@ class ImportTransactionsService {
         value: transaction.value,
         type: transaction.type,
         category: finalCategories.find(
-          cat => cat.title === transaction.category,
+          category => category.title === transaction.category,
         ),
       })),
     );
